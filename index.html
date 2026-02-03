@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXTATION: Lego Disruptive Chain Block Method™ - Story Mode 🚀</title>
+    <!-- Google Fonts for global typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
+    <!--
+        INLINE STYLES FOR INITIAL LOAD AND ROBUSTNESS:
+        These styles are included directly in the HTML to ensure the core "Batman Computer / Star Wars Console"
+        aesthetic is present immediately upon load, even before external CSS might fully parse or if you're
+        viewing the raw HTML without a build process. They carefully implement the color variables and design
+        specifics from the NEXTATION WEBSITE COLOUR SYSTEM AND USAGE.pdf.
+    -->
+    <style>
+        /* Global Colour Variables and Design Tokens */
+        :root {
+            --bg-main: #02030b;
+            --bg-gradient: radial-gradient(circle at top, #1c1f3b 0%, #050716 45%, #02030b 100%);
+            --card-bg: rgba(15, 18, 40, 0.92);
+            --card-soft-bg: rgba(18, 21, 50, 0.88);
+            --accent-cyan: #4ef2ff;
+            --accent-pink: #ff2f92;
+            --accent-green: #4dff9b;
+            --accent-yello: #ffe25f;
+            --accent-purple: #aa5dff;
+            --muted: rgba(255,255,255,0.65);
+            --border-glow: rgba(120,120,255,0.45);
+            --shadow-strong: 0 0 36px rgba(130,80,255,0.6);
+            --shadow-soft: 0 0 20px rgba(0,0,0,0.65);
+            --radius-lg: 22px;
+            --radius-md: 16px;
+            --radius-sm: 10px;
+            --transition-fast: 0.18s ease-out;
+            --transition-med: 0.28s ease-out;
+
+            --tab-normal-bg: radial-gradient(circle at top, rgba(255,255,255,0.09), rgba(7,10,28,0.96));
+            --tab-normal-border: rgba(130,140,200,0.4);
+            --tab-hover-border-strong: rgba(120,120,255,0.6);
+            --tab-hover-shadow: 0 0 20px rgba(120,120,255,0.35);
+            --tab-active-bg: radial-gradient(circle at top, rgba(255,255,255,0.15), rgba(21,13,51,0.98));
+            --tab-active-border: rgba(103,255,196,0.9);
+            --tab-active-shadow: 0 0 24px rgba(79,255,204,0.6);
+            --tab-completed-bg: radial-gradient(circle at top, rgba(77,255,155,0.1), rgba(10,30,15,0.96));
+            --tab-completed-border: rgba(77,255,155,0.6);
+            --tab-completed-shadow: 0 0 15px rgba(77,255,155,0.4);
+        }
+
+        /* Base styles for the entire page */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--bg-main);
+            background-image: var(--bg-gradient);
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header styling */
+        header {
+            background: linear-gradient(to right, rgba(15,18,40,0.95), rgba(6,8,26,0.95));
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--border-glow);
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .teacher-orb {
+            width: 60px;
+            height: 60px;
+            background: radial-gradient(circle at center, var(--accent-cyan) 0%, var(--accent-purple) 60%, transparent 100%);
+            border-radius: 50%;
+            box-shadow: 0 0 25px var(--accent-cyan), 0 0 40px var(--accent-purple);
+            animation: pulse-orb 3s infinite alternate ease-in-out;
+            flex-shrink: 0;
+        }
+
+        @keyframes pulse-orb {
+            0% { transform: scale(1); opacity: 0.8; }
+            100% { transform: scale(1.08); opacity: 1; }
+        }
+
+        .logo-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.8em;
+            color: var(--accent-cyan);
+            text-shadow: 0 0 15px rgba(78,242,255,0.7);
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            color: var(--muted);
+            margin: 0;
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* Main application container */
+        .main-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Tab navigation styling */
+        .tab-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px 0;
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-strong);
+            width: 100%;
+            max-width: 1000px;
+        }
+
+        .tab-item {
+            background: var(--tab-normal-bg);
+            border: 1px solid var(--tab-normal-border);
+            border-radius: var(--radius-md);
+            padding: 12px 20px;
+            cursor: pointer;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1em;
+            color: rgba(255,255,255,0.8);
+            transition: var(--transition-med);
+            text-align: center;
+            flex-grow: 1;
+            min-width: 120px; /* Ensure tabs don't get too small */
+            max-width: 180px; /* Max width for better wrapping */
+            box-shadow: 0 0 8px rgba(0,0,0,0.4);
+        }
+
+        .tab-item:hover {
+            border-color: var(--tab-hover-border-strong);
+            box-shadow: var(--tab-hover-shadow);
+            color: var(--accent-cyan);
+        }
+
+        .tab-item.active {
+            background: var(--tab-active-bg);
+            border-color: var(--tab-active-border);
+            box-shadow: var(--tab-active-shadow);
+            color: var(--accent-green);
+            font-weight: bold;
+        }
+
+        .tab-item.completed {
+            background: var(--tab-completed-bg);
+            border-color: var(--tab-completed-border);
+            box-shadow: var(--tab-completed-shadow);
+            color: var(--accent-green);
+            position: relative;
+        }
+
+        .tab-item.completed::after {
+            content: '✓';
+            position: absolute;
+            top: 5px;
+            right: 8px;
+            color: var(--accent-green);
+            font-size: 0.8em;
+            text-shadow: 0 0 5px var(--accent-green);
+        }
+
+        /* Lesson panel styling */
+        .lesson-panel {
+            background: var(--card-bg);
+            border: 1px solid var(--border-glow);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-strong);
+            padding: 30px 40px;
+            width: 100%;
+            max-width: 1000px;
+            box-sizing: border-box;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .lesson-panel h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 2em;
+            margin-top: 0;
+            text-shadow: 0 0 12px rgba(78,242,255,0.6);
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .lesson-panel h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            color: var(--accent-cyan);
+            font-size: 1.5em;
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-shadow: 0 0 8px rgba(78,242,255,0.5);
+        }
+
+        .story-section, .exercise-section {
+            background: var(--card-soft-bg);
+            border: 1px solid rgba(120,120,255,0.45);
+            border-radius: var(--radius-md);
+            padding: 20px;
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 1.05em;
+        }
+
+        .story-section h4 {
+            color: var(--accent-yello);
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            text-shadow: 0 0 5px rgba(255,226,95,0.4);
+        }
+
+        .expression-highlight {
+            color: var(--accent-green);
+            font-weight: bold;
+            text-shadow: 0 0 8px #4dff9b;
+        }
+
+        .separator {
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--border-glow), transparent);
+            margin: 30px auto;
+            box-shadow: 0 0 10px var(--border-glow);
+        }
+
+        .options label {
+            display: block;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: var(--radius-sm);
+            padding: 10px 15px;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+            display: flex;
+            align-items: center;
+        }
+
+        .options label:hover {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--accent-purple);
+        }
+
+        .options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: var(--accent-cyan); /* Custom color for radio button */
+        }
+
+        .options label.correct {
+            background: rgba(77,255,155,0.15);
+            border-color: var(--accent-green);
+            box-shadow: 0 0 10px rgba(77,255,155,0.5);
+        }
+
+        .options label.incorrect {
+            background: rgba(255,47,146,0.15);
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 10px rgba(255,47,146,0.5);
+        }
+
+        .exercise-section button {
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            border-radius: var(--radius-sm);
+            padding: 12px 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: var(--transition-med);
+            box-shadow: 0 0 15px rgba(255,47,146,0.5);
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exercise-section button:hover {
+            background: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(170,93,255,0.7);
+            transform: translateY(-2px);
+        }
+
+        .explanation {
+            background: rgba(255,255,255,0.05);
+            border-left: 4px solid var(--accent-yello);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: var(--radius-sm);
+            color: rgba(255,255,255,0.9);
+            font-size: 0.95em;
+        }
+
+        /* Footer styling */
+        footer {
+            background: linear-gradient(to right, rgba(15,18,40,0.95), rgba(6,8,26,0.95));
+            padding: 20px 40px;
+            border-top: 1px solid var(--border-glow);
+            box-shadow: 0 0 15px rgba(0,0,0,0.7);
+            text-align: center;
+            font-size: 0.85em;
+            color: var(--muted);
+            margin-top: auto;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+
+        footer .highlight-name {
+            color: var(--accent-cyan);
+            font-weight: bold;
+            text-shadow: 0 0 5px var(--accent-cyan);
+        }
+
+        footer span {
+            color: var(--accent-pink);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+
+            .teacher-orb {
+                width: 50px;
+                height: 50px;
+            }
+
+            .logo-title {
+                font-size: 1.5em;
+            }
+
+            .logo-subtitle {
+                font-size: 0.8em;
+            }
+
+            .main-container {
+                padding: 20px;
+                gap: 20px;
+            }
+
+            .tab-navigation {
+                padding: 15px;
+                gap: 10px;
+            }
+
+            .tab-item {
+                padding: 10px 15px;
+                font-size: 0.9em;
+                min-width: unset;
+                max-width: unset;
+                flex-basis: calc(50% - 10px); /* Two tabs per row */
+            }
+
+            .lesson-panel {
+                padding: 20px 25px;
+            }
+
+            .lesson-panel h2 {
+                font-size: 1.6em;
+            }
+
+            .lesson-panel h3 {
+                font-size: 1.3em;
+            }
+
+            .story-section, .exercise-section {
+                padding: 15px;
+                font-size: 1em;
+            }
+
+            .exercise-section button {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tab-item {
+                flex-basis: 100%; /* One tab per row */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER SECTION -->
+    <header>
+        <div class="header-content">
+            <div class="teacher-orb"></div>
+            <div>
+                <h1 class="logo-title">Daby's Lego Disruptive Chain Block Method™ 🧠</h1>
+                <p class="logo-subtitle">Thinking simulator for English mastery 🚀</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN APPLICATION CONTAINER -->
+    <div class="main-container">
+        <!-- TAB NAVIGATION STRIP -->
+        <div class="tab-navigation" id="tab-navigation">
+            <!-- Tabs will be dynamically inserted here by JavaScript -->
+        </div>
+
+        <!-- LESSON PANEL -->
+        <section class="lesson-panel">
+            <h2 id="lesson-title"></h2>
+            <div id="lesson-content">
+                <!-- Lesson content will be dynamically loaded here -->
+            </div>
+        </section>
+    </div>
+
+    <!-- FOOTER SECTION -->
+    <footer>
+        <p>&copy; 2026 Crafted with <span>&#10084;</span> by <span class="highlight-name">Daby</span>. All rights reserved.</p>
+        <p>Powered by the 🧠 Lego Disruptive Chain Block Method™.</p>
+    </footer>
+
+    <!--
+        Vue.js main application entry point.
+        This script will instantiate your app, handle routing, and manage dynamic content loading.
+    -->
+    <script type="module">
+        // Lesson data for all 10 situations
+        const lessons = [
+            {
+                id: 'situation-1',
+                tabTitle: 'Situation 1 👋',
+                expression: 'Be my guest',
+                story_pt: `
+                    <h4>No Elevador do Escritório 🏢</h4>
+                    <p>Ana e Carlos chegaram juntos ao elevador do escritório. A porta se abriu e Carlos, educadamente, fez um gesto para Ana entrar primeiro.</p>
+                    <p>Ana sorriu e disse: <span class="expression-highlight">"Por favor, pode ir na frente."</span></p>
+                    <p>Carlos, então, entrou e segurou a porta para ela.</p>
+                `,
+                story_en: `
+                    <h4>At the Office Elevator 🏢</h4>
+                    <p>Ana and Carlos arrived at the office elevator together. The door opened, and Carlos politely gestured for Ana to enter first.</p>
+                    <p>Ana smiled and said: <span class="expression-highlight">"Be my guest."</span></p>
+                    <p>Carlos then entered and held the door for her.</p>
+                `,
+                english_situation: `
+                    <p>You are offering someone permission to do something, inviting them to take something, or encouraging them to go first. It's a polite way to say "please do" or "feel free." 🙏</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você está em um jantar e seu amigo hesita em pegar o último pedaço de bolo.</p>
+                        <p>Como você o encorajaria a pegar?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Take it, it\'s yours."', isCorrect: false },
+                        { text: 'B) "Be my guest!"', isCorrect: true },
+                        { text: 'C) "You can take it."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Be my guest!" é a expressão perfeita para convidar alguém a fazer algo ou pegar algo, transmitindo uma permissão calorosa e educada. As outras opções são corretas, mas menos idiomáticas para essa situação. 🍰</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-2',
+                tabTitle: 'Situation 2 💯',
+                expression: 'I am dead right',
+                story_pt: `
+                    <h4>Discussão sobre o Resultado do Jogo ⚽</h4>
+                    <p>Na mesa do bar, Lucas e Pedro discutiam sobre o resultado de um jogo de futebol do dia anterior. Pedro estava convencido de que o placar era 2 a 1, mas Lucas tinha certeza que era 3 a 0.</p>
+                    <p>Lucas, batendo na mesa, afirmou: <span class="expression-highlight">"Eu tenho certeza absoluta! O placar foi 3 a 0, eu vi os gols!"</span></p>
+                    <p>Pedro, ainda cético, pegou o celular para verificar.</p>
+                `,
+                story_en: `
+                    <h4>Debate over the Game Score ⚽</h4>
+                    <p>At the bar table, Lucas and Pedro were arguing about the previous day's football match score. Pedro was convinced the score was 2-1, but Lucas was absolutely certain it was 3-0.</p>
+                    <p>Lucas, banging on the table, declared: <span class="expression-highlight">"I am dead right! The score was 3-0, I saw the goals!"</span></p>
+                    <p>Pedro, still skeptical, pulled out his phone to check.</p>
+                `,
+                english_situation: `
+                    <p>You are expressing extreme certainty about something you've said or believe. The word "dead" here acts as an intensifier, meaning "absolutely" or "completely." It's a strong way to emphasize your conviction. 💪</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo insiste que a capital da Austrália é Sydney, mas você sabe que é Canberra.</p>
+                        <p>Como você expressaria sua certeza absoluta?</p>
+                    `,
+                    options: [
+                        { text: 'A) "I am very right."', isCorrect: false },
+                        { text: 'B) "I am dead right, it\'s Canberra!"', isCorrect: true },
+                        { text: 'C) "I am completely correct."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "I am dead right" é uma expressão idiomática que significa "eu estou absolutamente certo". O "dead" intensifica o "right", tornando a afirmação muito mais forte e convincente do que "very right" ou "completely correct". 🇦🇺</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-3',
+                tabTitle: 'Situation 3 🗣️',
+                expression: 'So?',
+                story_pt: `
+                    <h4>A Notícia Inesperada 😲</h4>
+                    <p>Juliana estava contando a Pedro sobre a nova regra da empresa que ninguém gostou. Ela esperava uma reação de surpresa ou indignação, mas Pedro apenas a olhou com uma expressão neutra.</p>
+                    <p>Juliana, impaciente, perguntou: "Você não vai dizer nada sobre isso?"</p>
+                    <p>Pedro encolheu os ombros e respondeu: <span class="expression-highlight">"E daí? Não vai mudar nada para mim."</span></p>
+                `,
+                story_en: `
+                    <h4>The Unexpected News 😲</h4>
+                    <p>Juliana was telling Pedro about the new company rule that nobody liked. She expected a reaction of surprise or indignation, but Pedro just looked at her with a neutral expression.</p>
+                    <p>Juliana, impatiently, asked: "Aren't you going to say anything about it?"</p>
+                    <p>Pedro shrugged and replied: <span class="expression-highlight">"So? It won't change anything for me."</span></p>
+                `,
+                english_situation: `
+                    <p>You use "So?" to challenge someone's statement, implying that what they've said is irrelevant, obvious, or doesn't change anything. It can be dismissive, confrontational, or simply indicate a lack of interest in the implications. The tone is crucial. 🤷‍♀️</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu colega de trabalho diz: "O prazo para o projeto foi adiado em uma semana." Você já sabia e não se importa.</p>
+                        <p>Como você reagiria de forma concisa e desinteressada?</p>
+                    `,
+                    options: [
+                        { text: 'A) "And then?"', isCorrect: false },
+                        { text: 'B) "So?"', isCorrect: true },
+                        { text: 'C) "What about it?"', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "So?" é a forma mais direta e idiomática de expressar "E daí?" ou "Qual o problema?" em inglês, quando você quer indicar que a informação é irrelevante ou não te afeta. É uma expressão curta, mas carregada de tom. As outras opções não capturam a mesma nuance de desinteresse ou desafio. 💬</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-4',
+                tabTitle: 'Situation 4 💡',
+                expression: 'Oh I see',
+                story_pt: `
+                    <h4>Entendendo a Nova Receita 🧑‍🍳</h4>
+                    <p>Maria estava tentando seguir uma receita complexa de bolo, mas uma das etapas não fazia sentido. Ela pediu ajuda a sua avó, que explicou o truque de dobrar a massa de uma forma específica.</p>
+                    <p>Depois da explicação, Maria exclamou: <span class="expression-highlight">"Ah, entendi! Agora faz todo o sentido!"</span></p>
+                    <p>Com a nova compreensão, ela continuou a receita com confiança.</p>
+                `,
+                story_en: `
+                    <h4>Understanding the New Recipe 🧑‍🍳</h4>
+                    <p>Maria was trying to follow a complex cake recipe, but one of the steps didn't make sense. She asked her grandmother for help, who explained the trick of folding the dough in a specific way.</p>
+                    <p>After the explanation, Maria exclaimed: <span class="expression-highlight">"Oh I see! Now it all makes sense!"</span></p>
+                    <p>With her new understanding, she continued the recipe with confidence.</p>
+                `,
+                english_situation: `
+                    <p>You use "Oh I see" when you suddenly understand something that was previously unclear or confusing. It's an expression of realization or comprehension, often accompanied by a nod or a change in facial expression. It's more natural than "Oh I understand" in many casual contexts. 🧐</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo explica um conceito complicado de física que você estava com dificuldade para entender.</p>
+                        <p>Qual a melhor forma de expressar que você finalmente compreendeu?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Oh I understand now."', isCorrect: false },
+                        { text: 'B) "Oh I see!"', isCorrect: true },
+                        { text: 'C) "I got it!"', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Oh I see!" é a expressão mais natural e idiomática para indicar que você acabou de compreender algo que estava confuso. Embora "I understand now" e "I got it!" sejam corretos, "Oh I see!" transmite a sensação de uma nova percepção ou clareza. Use-o para soar mais nativo! ✨</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-5',
+                tabTitle: 'Situation 5 😩',
+                expression: 'Life is tough',
+                story_pt: `
+                    <h4>O Dia Ruim de Pedro 🌧️</h4>
+                    <p>Pedro chegou em casa exausto depois de um dia longo e cheio de problemas no trabalho. O carro quebrou, ele perdeu o ônibus e ainda teve uma discussão com um colega.</p>
+                    <p>Sua esposa perguntou como foi o dia, e ele, suspirando, respondeu: <span class="expression-highlight">"Ah, a vida não está fácil."</span></p>
+                    <p>Ela o abraçou, sabendo que ele precisava de um pouco de consolo.</p>
+                `,
+                story_en: `
+                    <h4>Pedro's Bad Day 🌧️</h4>
+                    <p>Pedro arrived home exhausted after a long day full of problems at work. His car broke down, he missed the bus, and he even had an argument with a colleague.</p>
+                    <p>His wife asked how his day was, and he, sighing, replied: <span class="expression-highlight">"Life is tough."</span></p>
+                    <p>She hugged him, knowing he needed some comfort.</p>
+                `,
+                english_situation: `
+                    <p>You use "Life is tough" to express that life is difficult, challenging, or unfair, often in response to a complaint or a bad situation. It's a common phrase to acknowledge hardship. 😔</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo está reclamando que perdeu o emprego e o aluguel está atrasado.</p>
+                        <p>Como você expressaria empatia e reconhecimento da dificuldade da situação?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Life is hard."', isCorrect: false },
+                        { text: 'B) "Life is tough."', isCorrect: true },
+                        { text: 'C) "Life is difficult."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Life is tough" é a expressão mais idiomática e comum para expressar que a vida é difícil ou desafiadora. Embora "hard" e "difficult" sejam sinônimos, "tough" carrega uma conotação de resiliência e a natureza implacável das dificuldades da vida. 💔</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-6',
+                tabTitle: 'Situation 6 🤞',
+                expression: 'Any luck?',
+                story_pt: `
+                    <h4>A Busca Pelo Celular Perdido 📱</h4>
+                    <p>Mariana estava desesperada procurando seu celular que havia sumido em casa. Depois de revirar o sofá e as almofadas, ela viu seu irmão, que estava ajudando na busca, saindo do quarto.</p>
+                    <p>Com esperança, ela perguntou: <span class="expression-highlight">"E aí, achou alguma coisa?"</span></p>
+                    <p>Ele balançou a cabeça negativamente, indicando que ainda não havia encontrado.</p>
+                `,
+                story_en: `
+                    <h4>The Search for the Lost Phone 📱</h4>
+                    <p>Mariana was desperately looking for her phone that had disappeared at home. After turning over the sofa and cushions, she saw her brother, who was helping with the search, coming out of the room.</p>
+                    <p>Hopefully, she asked: <span class="expression-highlight">"Any luck?"</span></p>
+                    <p>He shook his head negatively, indicating he hadn't found it yet.</p>
+                `,
+                english_situation: `
+                    <p>You use "Any luck?" to ask if someone has had success in finding something, achieving a goal, or making progress on a task. It's a concise and common way to inquire about the outcome of an effort. 🍀</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu colega está tentando consertar um problema técnico no computador há horas.</p>
+                        <p>Como você perguntaria se ele conseguiu resolver?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Did you have success?"', isCorrect: false },
+                        { text: 'B) "Any luck?"', isCorrect: true },
+                        { text: 'C) "Did you find it?"', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Any luck?" é a expressão idiomática perfeita para perguntar se alguém teve sucesso em uma tentativa ou busca. É muito mais natural do que as traduções literais e é amplamente usada em situações informais e formais. 💻</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-7',
+                tabTitle: 'Situation 7 🚫',
+                expression: 'A scam',
+                story_pt: `
+                    <h4>O Anúncio Enganoso Online 🎣</h4>
+                    <p>Carlos viu um anúncio online de um celular de última geração por um preço inacreditavelmente baixo. Ele clicou, preencheu seus dados e fez o pagamento. Dias depois, o produto não chegou e o site desapareceu.</p>
+                    <p>Ele contou a história para sua irmã, que balançou a cabeça e disse: <span class="expression-highlight">"Isso é uma fraude, Carlos! Você caiu em um golpe."</span></p>
+                    <p>Carlos percebeu que havia sido enganado.</p>
+                `,
+                story_en: `
+                    <h4>The Deceptive Online Ad 🎣</h4>
+                    <p>Carlos saw an online ad for a state-of-the-art cell phone at an unbelievably low price. He clicked, filled in his details, and made the payment. Days later, the product didn't arrive, and the website disappeared.</p>
+                    <p>He told the story to his sister, who shook her head and said: <span class="expression-highlight">"That's a scam, Carlos! You fell for a trick."</span></p>
+                    <p>Carlos realized he had been deceived.</p>
+                `,
+                english_situation: `
+                    <p>You are describing a fraudulent scheme or a dishonest trick designed to cheat someone out of money or something valuable. It implies deception and exploitation. 💸</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Você recebe um e-mail prometendo um prêmio milionário se você clicar em um link e fornecer seus dados bancários.</p>
+                        <p>Como você descreveria essa situação?</p>
+                    `,
+                    options: [
+                        { text: 'A) "It\'s a trick."', isCorrect: false },
+                        { text: 'B) "It\'s a scam."', isCorrect: true },
+                        { text: 'C) "It\'s a fraud."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "A scam" é a expressão mais comum e idiomática para descrever um golpe ou fraude, especialmente aqueles que visam enganar pessoas para obter dinheiro ou informações. "Fraud" é mais formal e "trick" pode ser menos sério. 📧</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-8',
+                tabTitle: 'Situation 8 💬',
+                expression: 'Go on',
+                story_pt: `
+                    <h4>Encorajando a Confissão 🤫</h4>
+                    <p>Mariana estava visivelmente nervosa, tentando contar algo importante para sua amiga, mas hesitava. Ela começou a falar, parou, e olhou para o chão.</p>
+                    <p>Sua amiga, com um sorriso encorajador, disse: <span class="expression-highlight">"Pode continuar, estou te ouvindo."</span></p>
+                    <p>Mariana respirou fundo e finalmente começou a revelar o segredo.</p>
+                `,
+                story_en: `
+                    <h4>Encouraging the Confession 🤫</h4>
+                    <p>Mariana was visibly nervous, trying to tell her friend something important, but she hesitated. She started to speak, stopped, and looked at the floor.</p>
+                    <p>Her friend, with an encouraging smile, said: <span class="expression-highlight">"Go on, I'm listening."</span></p>
+                    <p>Mariana took a deep breath and finally began to reveal the secret.</p>
+                `,
+                english_situation: `
+                    <p>You use "Go on" to encourage someone to continue speaking, to tell more, or to proceed with an action. It's a way to show you're listening and interested in what they have to say. It can also be used to express disbelief or challenge. 👂</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu colega de trabalho está explicando uma ideia, mas ele para e parece incerto.</p>
+                        <p>Como você o encorajaria a continuar a explicação?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Continue, please."', isCorrect: false },
+                        { text: 'B) "Go on."', isCorrect: true },
+                        { text: 'C) "Speak more."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Go on" é a expressão mais natural e idiomática para encorajar alguém a continuar falando ou a prosseguir. É concisa e muito comum em conversas. As outras opções são gramaticalmente corretas, mas menos idiomáticas para o contexto de encorajamento. 🗣️</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-9',
+                tabTitle: 'Situation 9 🧘',
+                expression: 'Chill out!',
+                story_pt: `
+                    <h4>No Trânsito Caótico 🚗💨</h4>
+                    <p>João estava preso no trânsito pesado de São Paulo, buzinando e xingando os outros motoristas. Sua namorada, ao lado, percebeu que ele estava ficando cada vez mais estressado.</p>
+                    <p>Ela, calmamente, disse: <span class="expression-highlight">"Calma, João! Não adianta se estressar, não vai mudar nada."</span></p>
+                    <p>Ele respirou fundo e tentou relaxar um pouco.</p>
+                `,
+                story_en: `
+                    <h4>In Chaotic Traffic 🚗💨</h4>
+                    <p>João was stuck in heavy São Paulo traffic, honking and cursing at other drivers. His girlfriend, beside him, noticed he was getting increasingly stressed.</p>
+                    <p>She calmly said: <span class="expression-highlight">"Chill out, João! Getting stressed won't change anything."</span></p>
+                    <p>He took a deep breath and tried to relax a bit.</p>
+                `,
+                english_situation: `
+                    <p>You use "Chill out!" to tell someone to relax, calm down, or stop being so agitated or angry. It's an informal but very common way to advise someone to take it easy. 🌬️</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu amigo está muito bravo com uma situação trivial e começa a gritar.</p>
+                        <p>Como você o aconselharia a se acalmar?</p>
+                    `,
+                    options: [
+                        { text: 'A) "Calm down!"', isCorrect: false },
+                        { text: 'B) "Chill out!"', isCorrect: true },
+                        { text: 'C) "Relax yourself!"', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "Chill out!" é uma expressão informal e muito comum para dizer a alguém para se acalmar ou relaxar. É mais idiomática do que "Calm down!" em muitos contextos casuais, e "Relax yourself!" não é natural em inglês. 😌</p>
+                    `
+                }
+            },
+            {
+                id: 'situation-10',
+                tabTitle: 'Situation 10 🤒',
+                expression: 'On sick leave',
+                story_pt: `
+                    <h4>Ausência no Trabalho por Doença 😷</h4>
+                    <p>A gerente do RH, Ana, estava atualizando a lista de presença da equipe. Ela notou que um dos funcionários, Pedro, não estava no escritório há alguns dias.</p>
+                    <p>Ela perguntou a um colega: "Onde está o Pedro?"</p>
+                    <p>O colega respondeu: <span class="expression-highlight">"Ele está de licença médica desde segunda-feira, Ana."</span></p>
+                `,
+                story_en: `
+                    <h4>Absence from Work Due to Illness 😷</h4>
+                    <p>The HR manager, Ana, was updating the team's attendance list. She noticed that one of the employees, Pedro, hadn't been in the office for a few days.</p>
+                    <p>She asked a colleague: "Where is Pedro?"</p>
+                    <p>The colleague replied: <span class="expression-highlight">"He's on sick leave since Monday, Ana."</span></p>
+                `,
+                english_situation: `
+                    <p>You are describing someone's absence from work because they are ill. It's a formal or semi-formal way to state that an employee is temporarily away from their job due to health reasons. 🏥</p>
+                `,
+                exercise: {
+                    question: `
+                        <p>Seu chefe pergunta por que um colega não está no trabalho.</p>
+                        <p>Você sabe que ele está doente e não virá por alguns dias.</p>
+                        <p>Como você informaria isso?</p>
+                    `,
+                    options: [
+                        { text: 'A) "He is sick from work."', isCorrect: false },
+                        { text: 'B) "He is on sick leave."', isCorrect: true },
+                        { text: 'C) "He is absent due to sickness."', isCorrect: false }
+                    ],
+                    explanation: `
+                        <p><strong style="color: var(--accent-yello);">Por quê?</strong> "He is on sick leave" é a expressão padrão e mais natural para indicar que alguém está ausente do trabalho devido a doença. É a forma idiomática de se referir a uma licença médica. 🤒</p>
+                    `
+                }
+            }
+        ];
+
+        let currentLessonIndex = -1;
+        let activeTabElement = null;
+
+        function renderLesson(lessonIndex) {
+            const lesson = lessons[lessonIndex];
+            const lessonContentDiv = document.getElementById('lesson-content');
+            const lessonTitleH2 = document.getElementById('lesson-title');
+
+            lessonTitleH2.innerHTML = `🔹 ${lesson.tabTitle} — <span style="color: var(--accent-yello);">${lesson.expression}</span>`;
+            lessonContentDiv.innerHTML = ''; // Clear previous content
+
+            // Story in Portuguese
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">História em Português 🇧🇷</h3>
+                <div class="story-section">
+                    ${lesson.story_pt}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Story in English
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">Story in English 🇺🇸🇬🇧</h3>
+                <div class="story-section">
+                    ${lesson.story_en}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Real-feeling English Situation
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-cyan); text-shadow: 0 0 8px rgba(78,242,255,0.5);">Real-Feeling English Situation 💡</h3>
+                <div class="story-section">
+                    ${lesson.english_situation}
+                </div>
+                <div class="separator"></div>
+            `;
+
+            // Quick Exercise
+            lessonContentDiv.innerHTML += `
+                <h3 style="color: var(--accent-yello); text-shadow: 0 0 8px rgba(255,226,95,0.5);">Quick Exercise ✅</h3>
+                <div class="exercise-section">
+                    ${lesson.exercise.question}
+                    <div class="options" id="exercise-options-${lessonIndex}">
+                        ${lesson.exercise.options.map((option, idx) => `
+                            <label>
+                                <input type="radio" name="exercise-q-${lessonIndex}" value="${idx}" data-correct="${option.isCorrect}">
+                                ${option.text}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <button onclick="checkExerciseAnswer(${lessonIndex})">CHECK ANSWER</button>
+                    <div class="explanation" id="exercise-explanation-${lessonIndex}" style="display: none;">
+                        ${lesson.exercise.explanation}
+                    </div>
+                </div>
+            `;
+        }
+
+        function checkExerciseAnswer(lessonIndex) {
+            const optionsDiv = document.getElementById(`exercise-options-${lessonIndex}`);
+            const explanationDiv = document.getElementById(`exercise-explanation-${lessonIndex}`);
+            const radios = optionsDiv.querySelectorAll('input[type="radio"]');
+            let selectedCorrect = false;
+
+            radios.forEach(radio => {
+                const label = radio.closest('label');
+                label.classList.remove('correct', 'incorrect');
+                if (radio.checked) {
+                    if (radio.dataset.correct === 'true') {
+                        label.classList.add('correct');
+                        selectedCorrect = true;
+                    } else {
+                        label.classList.add('incorrect');
+                    }
+                }
+            });
+
+            explanationDiv.style.display = 'block';
+
+            if (selectedCorrect && currentLessonIndex !== -1) {
+                const tabElement = document.querySelector(`.tab-item[data-lesson-id="${lessons[currentLessonIndex].id}"]`);
+                if (tabElement && !tabElement.classList.contains('completed')) {
+                    tabElement.classList.add('completed');
+                }
+            }
+        }
+
+        function setActiveTab(tabElement, lessonIndex) {
+            if (activeTabElement) {
+                activeTabElement.classList.remove('active');
+            }
+            tabElement.classList.add('active');
+            activeTabElement = tabElement;
+            currentLessonIndex = lessonIndex;
+            renderLesson(lessonIndex);
+        }
+
+        // Initialize tabs
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabNavigation = document.getElementById('tab-navigation');
+            lessons.forEach((lesson, index) => {
+                const tabItem = document.createElement('div');
+                tabItem.classList.add('tab-item');
+                tabItem.textContent = lesson.tabTitle;
+                tabItem.dataset.lessonId = lesson.id;
+                tabItem.addEventListener('click', () => setActiveTab(tabItem, index));
+                tabNavigation.appendChild(tabItem);
+            });
+
+            // Set initial active tab (Situation 1)
+            if (lessons.length > 0) {
+                const firstTab = tabNavigation.querySelector('.tab-item');
+                if (firstTab) {
+                    setActiveTab(firstTab, 0);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
